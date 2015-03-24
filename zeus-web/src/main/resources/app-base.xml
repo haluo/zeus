@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.soa"/>
+    <aop:aspectj-autoproxy/>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" autowire="byName">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:sqlmap-config.xml"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource"  ref="dataSource"/>
+    </bean>
+
+    <bean name="velocityTools" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="stringUtils">
+                    <bean class="org.apache.commons.lang.StringUtils"/>
+                </entry>
+                <entry key="stringEscapeUtils">
+                    <bean class="org.apache.commons.lang.StringEscapeUtils"/>
+                </entry>
+                <entry key="dfUtils">
+                    <bean class="com.soa.zeus.service.util.DateTools"/>
+                </entry>
+                <entry key="dateUtils">
+                    <bean class="org.apache.commons.lang.time.DateUtils"/>
+                </entry>
+                <entry key="commonUtil">
+                    <bean class="com.soa.zeus.web.util.CommonUtil"/>
+                </entry>
+                <entry key="pageUtil">
+                    <bean class="com.soa.zeus.web.util.PageUtil"/>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="cfg" class="com.soa.zeus.service.common.Cfg">
+        <property name="QN_NS_NAME" value="${com.nsx.sendx.img.qiniu.ns}" />
+        <property name="QN_NS_HTTP_PRE" value="${com.nsx.sendx.img.http.pre}" />
+    </bean>
+
+    <bean id="velocityUrl" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="home" value="http://${com.nsx.sendx.url.home}"/>
+                <entry key="imgHome" value="${com.nsx.sendx.img.http.pre}"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

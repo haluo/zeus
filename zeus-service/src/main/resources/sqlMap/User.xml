@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="User">
+
+    <typeAlias alias="User" type="com.soa.zeus.service.domain.User"/>
+
+    <resultMap id="resultMap" class="User">
+        <result column="id" property="id" />
+        <result column="wx_id" property="wxId" />
+        <result column="phone" property="phone" />
+    </resultMap>
+
+
+    <sql id="allField">
+        id,wx_id,phone
+    </sql>
+
+    <insert id="save" parameterClass="User">
+        insert into db_user(
+            wx_id,phone
+            )
+        values(
+            #wxId#,#phone#
+        )
+        <selectKey resultClass="int" keyProperty="id" >
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <!--通用查询方法-->
+    <select id="get" parameterClass="map" resultMap="resultMap">
+        select <include refid="allField"/>
+        from db_user
+        <dynamic prepend="where">
+            <isNotEmpty prepend="and" property="id">
+                id = #id#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="wxId">
+                wx_id = #wxId#
+            </isNotEmpty>
+        </dynamic>
+    </select>
+
+</sqlMap>

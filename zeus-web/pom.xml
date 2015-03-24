@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>zeus</artifactId>
+        <groupId>com.soa</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>zeus-web</artifactId>
+    <packaging>war</packaging>
+    <name>zeus-web Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.soa</groupId>
+            <artifactId>zeus-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>oscache</artifactId>
+            <version>2.4.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+            <version>2.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>zeus-web</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <properties>
+                <com.nsx.sendx.jdbc.url>jdbc:mysql://localhost:3306/zeus</com.nsx.sendx.jdbc.url>
+                <com.nsx.sendx.jdbc.encoding>UTF-8</com.nsx.sendx.jdbc.encoding>
+                <com.nsx.sendx.jdbc.user>root</com.nsx.sendx.jdbc.user>
+                <com.nsx.sendx.jdbc.password>123</com.nsx.sendx.jdbc.password>
+                <com.nsx.sendx.jdbc.initPoolSize>3</com.nsx.sendx.jdbc.initPoolSize>
+                <com.nsx.sendx.jdbc.maxPoolSize>3</com.nsx.sendx.jdbc.maxPoolSize>
+                <com.nsx.sendx.jdbc.showsql>true</com.nsx.sendx.jdbc.showsql>
+
+                <com.nsx.sendx.log.path>/Users/shizhizhong/tmp/logs/sendx</com.nsx.sendx.log.path>
+                <com.nsx.sendx.log.level>INFO</com.nsx.sendx.log.level>
+                <com.nsx.sendx.url.home>localhost:8080</com.nsx.sendx.url.home>
+
+                <com.nsx.sendx.img.qiniu.ns>teslas</com.nsx.sendx.img.qiniu.ns>
+                <com.nsx.sendx.img.http.pre>http://teslas.qiniudn.com</com.nsx.sendx.img.http.pre>
+
+            </properties>
+        </profile>
+        <profile>
+            <id>online</id>
+            <properties>
+                <com.nsx.sendx.jdbc.url>jdbc:mysql://localhost:3306/zeus</com.nsx.sendx.jdbc.url>
+                <com.nsx.sendx.jdbc.encoding>UTF-8</com.nsx.sendx.jdbc.encoding>
+                <com.nsx.sendx.jdbc.user>root</com.nsx.sendx.jdbc.user>
+                <com.nsx.sendx.jdbc.password>123</com.nsx.sendx.jdbc.password>
+                <com.nsx.sendx.jdbc.initPoolSize>5</com.nsx.sendx.jdbc.initPoolSize>
+                <com.nsx.sendx.jdbc.maxPoolSize>10</com.nsx.sendx.jdbc.maxPoolSize>
+                <com.nsx.sendx.jdbc.showsql>true</com.nsx.sendx.jdbc.showsql>
+
+                <com.nsx.sendx.log.path>/home/sendx/tomcat7/logs</com.nsx.sendx.log.path>
+                <com.nsx.sendx.log.level>INFO</com.nsx.sendx.log.level>
+                <com.nsx.sendx.url.home>www.xiaomaisong.cn</com.nsx.sendx.url.home>
+
+                <com.nsx.sendx.img.qiniu.ns>teslas</com.nsx.sendx.img.qiniu.ns>
+                <com.nsx.sendx.img.http.pre>http://teslas.qiniudn.com</com.nsx.sendx.img.http.pre>
+            </properties>
+        </profile>
+    </profiles>
+</project>

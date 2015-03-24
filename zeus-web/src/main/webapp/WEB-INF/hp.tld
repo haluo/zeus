@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description>HP Code</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>hp</short-name>
+    <uri>/bbtt</uri>
+
+    <function>
+        <name>encoder</name>
+        <function-class>weibo4j.util.URLEncodeUtils</function-class>
+        <function-signature>java.lang.String encodeURL(java.lang.String)</function-signature>
+        <example>${hp.encoder('')}</example>
+    </function>
+
+    <function>
+        <name>decoder</name>
+        <function-class>weibo4j.util.URLEncodeUtils</function-class>
+        <function-signature>java.lang.String decodeURL(java.lang.String)</function-signature>
+        <example>${hp.decoder('')}</example>
+    </function>
+</taglib>

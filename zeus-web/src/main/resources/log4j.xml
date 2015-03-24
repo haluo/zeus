@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="Encoding" value="UTF-8"/>
+            <param name="ConversionPattern" value="[%7r] %6p - %30.30c - %m \n"/>
+        </layout>
+    </appender>
+	
+	
+	<appender name="FILE-DEBUG" class="org.apache.log4j.FileAppender">
+        <param name="Append" value="true"/>
+        <param name="file" value="${com.soa.zeus.log.path}/bb-debug.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%7r] %6p - %30.30c - %m \n"/>
+        </layout>
+    </appender>
+
+    <!--显示sql start-->
+	<logger name="java.sql.Connection">
+        <level value="${com.soa.zeus.log.level}" />
+    </logger>
+
+    <logger name="java.sql.PreparedStatement">
+        <level value="${com.soa.zeus.log.level}" />
+    </logger>
+    <!--显示sql end-->
+
+	<root>
+        <priority value="${com.soa.zeus.log.level}"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-DEBUG"/>
+    </root>
+</log4j:configuration>
